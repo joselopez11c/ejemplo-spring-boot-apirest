@@ -2,8 +2,10 @@ package com.coderhouse.controlleradvice.controller;
 
 import com.coderhouse.controlleradvice.handle.ApiRestException;
 import com.coderhouse.controlleradvice.model.Mensaje;
+import com.coderhouse.controlleradvice.service.PersonService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +18,13 @@ public class MensajesController {
 
     Logger logger = LogManager.getLogger(MensajesController.class);
 
+    @Autowired
+    private PersonService personService;
+
     @GetMapping("/mensajes/example")
     public String getMensajesString() {
         logger.info("GET Request recibido string");
-        return "Mensaje GET";
+        return "Ejemplo de respuesta";
     }
 
     @GetMapping("/mensajes/all")
