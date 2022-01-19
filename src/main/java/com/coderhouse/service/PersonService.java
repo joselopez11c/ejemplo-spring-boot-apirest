@@ -1,4 +1,4 @@
-package com.coderhouse.controlleradvice.service;
+package com.coderhouse.service;
 
 public interface PersonService {
 

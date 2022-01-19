@@ -1,13 +1,15 @@
-package com.coderhouse.controlleradvice.model;
+package com.coderhouse.model;
 
-public class Mensaje {
+public class Message {
     private Long id;
     private String description;
 
-    public Mensaje(Long id, String description) {
+    public Message(Long id, String description) {
         this.id = id;
         this.description = description;
     }
+
+    public Message() {}
 
     public void setId(Long id) {
         this.id = id;

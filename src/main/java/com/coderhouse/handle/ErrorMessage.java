@@ -1,4 +1,4 @@
-package com.coderhouse.controlleradvice.handle;
+package com.coderhouse.handle;
 
 public class ErrorMessage {
     private String error;

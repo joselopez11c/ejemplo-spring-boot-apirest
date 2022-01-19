@@ -1,8 +1,8 @@
-package com.coderhouse.controlleradvice.controller;
+package com.coderhouse.controller;
 
-import com.coderhouse.controlleradvice.handle.ApiRestException;
-import com.coderhouse.controlleradvice.model.Mensaje;
-import com.coderhouse.controlleradvice.service.PersonService;
+import com.coderhouse.handle.ApiRestException;
+import com.coderhouse.model.Message;
+import com.coderhouse.service.PersonService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/coder-house")
-public class MensajesController {
+public class MessageController {
 
-    Logger logger = LogManager.getLogger(MensajesController.class);
+    Logger logger = LogManager.getLogger(MessageController.class);
 
     @Autowired
     private PersonService personService;
@@ -28,13 +28,13 @@ public class MensajesController {
     }
 
     @GetMapping("/mensajes/all")
-    public List<Mensaje> getMensajesAll() {
+    public List<Message> getMensajesAll() {
         logger.info("GET Request recibido string");
         return dataMensajes();
     }
 
     @GetMapping("/mensajes")
-    public List<Mensaje> getMensajesByDescription(@RequestParam String description) {
+    public List<Message> getMensajesByDescription(@RequestParam String description) {
         logger.info("GET obtener mensajes que sean iguales a la descripción");
         var msjFiltered = dataMensajes().stream()
                 .filter(mensajes -> mensajes.getDescription().equalsIgnoreCase(description));
@@ -42,25 +42,25 @@ public class MensajesController {
     }
 
     @GetMapping("/mensajes/{id}")
-    public Mensaje getMensajeById(@PathVariable Long id) throws ApiRestException {
+    public Message getMensajeById(@PathVariable Long id) throws ApiRestException {
         logger.info("GET obtener mensaje por el id");
 
-        if(id == 0) {
+        if (id == 0) {
             throw new ApiRestException("El identificador del mensaje debe ser mayor a 0");
         }
         var msjFiltered = dataMensajes().stream()
                 .filter(mensajes -> Objects.equals(mensajes.getId(), id));
-        return msjFiltered.findFirst().orElse(new Mensaje(0L, "No existe el mensaje"));
+        return msjFiltered.findFirst().orElse(new Message(0L, "No existe el mensaje"));
     }
 
 
-    private List<Mensaje> dataMensajes() {
+    private List<Message> dataMensajes() {
         return List.of(
-                new Mensaje(1L, "Mensaje-ABCD"),
-                new Mensaje(2L, "Mensaje-ABCD"),
-                new Mensaje(3L, "Mensaje-ABCD"),
-                new Mensaje(4L, "Mensaje-ABCE"),
-                new Mensaje(5L, "Mensaje-ABCF")
+                new Message(1L, "Mensaje-ABCD"),
+                new Message(2L, "Mensaje-ABCD"),
+                new Message(3L, "Mensaje-ABCD"),
+                new Message(4L, "Mensaje-ABCE"),
+                new Message(5L, "Mensaje-ABCF")
         );
     }
 }
